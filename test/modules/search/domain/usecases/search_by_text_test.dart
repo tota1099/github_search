@@ -24,8 +24,10 @@ main() {
   test('Should return exception if input is invalid', () async {
     when(repository.search(any)).thenAnswer((_) async => Right(<ResultSearch>[]));
 
-    final result = await usecase(null);
-    expect(result.isLeft(), true);
-    expect(result.fold(id, id), isA<InvalidTextError>() );
+    var result = await usecase(null);
+    expect(result.fold(id, id), isA<InvalidTextError>());
+
+    result = await usecase('');
+    expect(result.fold(id, id), isA<InvalidTextError>());
   });
 }
