@@ -21,7 +21,7 @@ main() {
     expect(result | null, isA<List<ResultSearch>>());
   });
 
-  test('Should return exception if input is invalid', () async {
+  test('Should return InvalidTextError if input is invalid', () async {
     when(repository.search(any)).thenAnswer((_) async => Right(<ResultSearch>[]));
 
     var result = await usecase(null);
