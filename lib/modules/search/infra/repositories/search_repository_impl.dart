@@ -8,10 +8,11 @@ class SearchRepositoryImpl implements SearchRepository {
   final SearchDataSource datasource;
 
   SearchRepositoryImpl(this.datasource);
-  
+
   @override
-  Future<Either<FailureSearch, List<ResultSearch>>> search(String searchText) {
-    throw UnimplementedError();
+  Future<Either<FailureSearch, List<ResultSearch>>> search(String searchText) async {
+    final result = await datasource.getSearch(searchText);
+    return Right(result);
   }
 
 }
