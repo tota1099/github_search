@@ -1,8 +1,8 @@
 class ResultSearch {
 
-  final String title;
-  final String content;
-  final String img;
+  final String nickname;
+  final String image;
+  final String url;
 
-  ResultSearch({this.title, this.content, this.img});
+  ResultSearch({this.nickname, this.image, this.url});
 }

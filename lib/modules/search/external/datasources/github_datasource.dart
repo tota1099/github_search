@@ -19,7 +19,13 @@ class GitHubDatasource implements SearchDataSource {
     final response = await dio.get("https://api.github.com/search/users?q=${searchText.normalize()}");
     
     if(response.statusCode == 200) {
-      final list = (response.data['items'] as List).map((e) => ResultSearchModel.fromMap(e)).toList();
+      var jsonList = response.data['items'] as List;
+      final list = jsonList
+          .map((item) => ResultSearchModel(
+              nickname: item['login'],
+              image: item['avatar_url'],
+              url: item['url']))
+          .toList();
       return list;
     } else {
       throw DatasourceError();
