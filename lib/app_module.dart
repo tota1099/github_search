@@ -5,6 +5,7 @@ import 'package:github_search/app_widget.dart';
 import 'package:github_search/modules/search/domain/usecases/search_by_text.dart';
 import 'package:github_search/modules/search/external/datasources/github_datasource.dart';
 import 'package:github_search/modules/search/infra/repositories/search_repository_impl.dart';
+import 'package:github_search/presenter/search/search_page.dart';
 
 class AppModule extends MainModule {
   @override
@@ -16,7 +17,9 @@ class AppModule extends MainModule {
   ];
 
   @override
-  List<Router> get routers => throw UnimplementedError();
+  List<Router> get routers => [
+    Router('/', child: (_, __) => SearchPage()),
+  ];
 
   @override
   Widget get bootstrap => AppWidget();
