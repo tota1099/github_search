@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:github_search/modules/search/domain/errors/errors.dart';
 import 'package:github_search/modules/search/infra/datasources/search_datasource.dart';
 import 'package:github_search/modules/search/infra/models/result_search_model.dart';
 
@@ -21,7 +22,7 @@ class GitHubDatasource implements SearchDataSource {
       final list = (response.data['items'] as List).map((e) => ResultSearchModel.fromMap(e)).toList();
       return list;
     } else {
-
+      throw DatasourceError();
     }
   }
 
