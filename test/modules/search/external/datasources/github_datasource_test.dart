@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:github_search/modules/search/domain/errors/errors.dart';
 import 'package:github_search/modules/search/external/datasources/github_datasource.dart';
 import 'package:mockito/mockito.dart';
 
@@ -18,5 +19,12 @@ main() {
 
     final future = datasource.getSearch("searchText");
     expect(future, completes);
+  });
+
+  test("Should return a DatasourceError if statuscode was not 200", () async {
+    when(dio.get(any)).thenAnswer((_) async => Response(data: null, statusCode: 401));
+
+    final future = datasource.getSearch("searchText");
+    expect(future, throwsA(isA<DatasourceError>()));
   });
 }
